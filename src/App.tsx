@@ -323,7 +323,7 @@ export default function App() {
         <div className="container mx-auto px-6 mb-24">
           <div className="ad-box p-4">
             <div className="mb-4 text-[10px] font-bold tracking-widest text-white/20 uppercase">Sponsored</div>
-            <AdsterraAd id="banner-1" format="banner" />
+            <AdsterraAd id="f149876631f9763a80c03c42da042979" format="banner" />
           </div>
         </div>
 
