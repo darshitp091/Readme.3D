@@ -50,6 +50,9 @@ README.3D is a modern, high-performance web application designed to automate the
    Create a `.env` file in the root directory:
    ```env
    GEMINI_API_KEY=your_api_key_here
+
+   # Adsterra Configuration (Optional)
+   ADSTERRA_API_KEY=your_adsterra_api_key
    ```
 
 4. **Run the development server**
