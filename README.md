@@ -54,6 +54,7 @@ README.3D is a modern, high-performance web application designed to automate the
    # Adsterra Configuration (Optional)
    ADSTERRA_API_KEY=your_adsterra_api_key
    VITE_ADSTERRA_POPUNDER_URL=your_popunder_script_url
+   VITE_ADSTERRA_SOCIAL_BAR_URL=your_social_bar_script_url
    ```
 
 4. **Run the development server**
