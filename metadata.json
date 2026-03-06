@@ -1,0 +1,5 @@
+{
+  "name": "README.3D",
+  "description": "An immersive 3D README generator powered by Gemini AI. Analyze repositories or describe your project to generate stunning markdown instantly.",
+  "requestFramePermissions": []
+}
