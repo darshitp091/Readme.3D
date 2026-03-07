@@ -69,46 +69,47 @@ export default function App() {
     setIsAnalyzing(true);
     setError(null);
     try {
-      // Use VITE_APP_URL if provided, otherwise use relative path
-      const baseUrl = import.meta.env.VITE_APP_URL ? import.meta.env.VITE_APP_URL.replace(/\/$/, '') : '';
-      console.log('Analyzing repo:', repoUrl, 'on origin:', window.location.origin, 'using baseUrl:', baseUrl);
-      const response = await axios.post(`${baseUrl}/api/analyze-repo`, { repoUrl });
-      console.log('Analyze response:', response.data);
-      const data = { ...response.data, repoUrl }; // Add repoUrl to info
+      console.log('Analyzing repo:', repoUrl);
+      const response = await axios.post(`/api/analyze-repo`, { repoUrl });
+      const data = { ...response.data, repoUrl };
       setRepoInfo(data);
 
       // Build a rich summary for the context field
-      let summary = `Repository: ${data.name}\n`;
-      summary += `Full Name: ${data.fullName}\n`;
-      summary += `Description: ${data.description || 'No description provided.'}\n`;
-      summary += `Stats: ⭐ ${data.stars} | 🍴 ${data.forks} | 📜 ${data.license || 'None'}\n\n`;
+      let summary = `## Project Overview: ${data.name || data.fullName}\n`;
+      if (data.description) summary += `> ${data.description}\n\n`;
 
-      if (data.packageJson) {
-        summary += `Tech Stack (from package.json):\n`;
-        const deps = Object.keys(data.packageJson.dependencies || {}).slice(0, 10);
-        if (deps.length) summary += `- Key Dependencies: ${deps.join(', ')}\n`;
+      summary += `### 🛠️ Tech Stack & Architecture\n`;
+      summary += `- **Languages**: ${data.languages?.join(', ') || 'N/A'}\n`;
+      if (data.packageJson?.version) summary += `- **Version**: v${data.packageJson.version}\n`;
+      if (data.isMonorepo) summary += `- **Monorepo Structure**: Detected\n`;
+      if (data.hasTests) summary += `- **Tests**: Configuration detected\n`;
 
-        const scripts = Object.keys(data.packageJson.scripts || {});
-        if (scripts.length) summary += `- Available Scripts: ${scripts.join(', ')}\n`;
-
-        if (data.packageJson.version) summary += `- Version: ${data.packageJson.version}\n`;
-        summary += `\n`;
+      if (data.techStack) {
+        const stackItems = [];
+        if (data.techStack.hasNext) stackItems.push('Next.js');
+        if (data.techStack.hasVite) stackItems.push('Vite');
+        if (data.techStack.hasDocker) stackItems.push('Docker');
+        if (stackItems.length) summary += `- **Frameworks**: ${stackItems.join(', ')}\n`;
       }
 
-      summary += `Languages: ${data.languages.join(', ')}\n`;
-      summary += `Files: ${data.files}\n\n`;
-
-      if (data.existingReadme) {
-        summary += `Existing README found. Analyzing for features and usage...\n`;
+      if (data.packageJson?.scripts) {
+        const scripts = Object.keys(data.packageJson.scripts).slice(0, 5);
+        summary += `- **Scripts**: \`${scripts.join('`, `')}\`\n`;
       }
+
+      if (data.envExample) {
+        summary += `\n### 🔑 Environment Variables\nRequired keys found in .env.example:\n\`\`\`\n${data.envExample.substring(0, 500)}\`\`\`\n`;
+      }
+
+      summary += `\n### 📁 Notable Files\n${data.files}\n`;
+
+      summary += `\n### 🚀 Growth Stats\n- ⭐ ${data.stars} Stars | 🍴 ${data.forks} Forks\n`;
+      summary += `- License: ${data.license || 'Not specified'}\n`;
 
       setProjectDetails(summary);
     } catch (err: any) {
       console.error('Analyze error:', err);
-      const errorData = err.response?.data?.error;
-      const errorMessage = typeof errorData === 'string'
-        ? errorData
-        : (typeof errorData === 'object' ? JSON.stringify(errorData) : (err.message || 'Failed to analyze repository'));
+      const errorMessage = err.response?.data?.error || err.message || 'Failed to analyze repository';
       setError(errorMessage);
     } finally {
       setIsAnalyzing(false);
