@@ -21,9 +21,9 @@ import confetti from 'canvas-confetti';
 import axios from 'axios';
 
 import { Scene } from './components/Scene';
+import { AdsterraAds } from './components/AdsterraAds';
 import { generateREADME, RepoInfo } from './services/ai';
 import { cn } from './lib/utils';
-import { AdsterraAd } from './components/AdsterraAd';
 
 export default function App() {
   const [repoUrl, setRepoUrl] = useState('');
@@ -39,22 +39,6 @@ export default function App() {
 
   const [showPrivacy, setShowPrivacy] = useState(false);
   const [showTerms, setShowTerms] = useState(false);
-  const [adsterraStatus, setAdsterraStatus] = useState<'idle' | 'testing' | 'success' | 'error'>('idle');
-
-  const testAdsterra = async () => {
-    setAdsterraStatus('testing');
-    try {
-      const response = await fetch('/api/adsterra/test');
-      const data = await response.json();
-      if (data.success) {
-        setAdsterraStatus('success');
-      } else {
-        setAdsterraStatus('error');
-      }
-    } catch (err) {
-      setAdsterraStatus('error');
-    }
-  };
   
   // Loading States
   const [loadingProgress, setLoadingProgress] = useState(0);
@@ -319,14 +303,6 @@ export default function App() {
           </motion.div>
         </section>
 
-        {/* Ad Section 1 */}
-        <div className="container mx-auto px-6 mb-24">
-          <div className="ad-box p-4">
-            <div className="mb-4 text-[10px] font-bold tracking-widest text-white/20 uppercase">Sponsored</div>
-            <AdsterraAd id="f149876631f9763a80c03c42da042979" format="banner" />
-          </div>
-        </div>
-
         {/* Features Section */}
         <section id="features" className="container mx-auto px-6 py-32">
           <div className="text-center mb-24 space-y-4">
@@ -480,14 +456,6 @@ export default function App() {
           </div>
         </section>
 
-        {/* Ad Section 2 */}
-        <div className="container mx-auto px-6 mb-32">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <AdsterraAd id="banner-2" format="banner" />
-            <AdsterraAd id="banner-3" format="banner" />
-          </div>
-        </div>
-
         {/* Footer Section */}
         <footer className="relative border-t border-white/5 bg-white/[0.01] backdrop-blur-3xl pt-24 pb-12 overflow-hidden">
           <motion.div 
@@ -550,28 +518,6 @@ export default function App() {
             <div className="flex flex-col md:flex-row items-center justify-between gap-8 pt-12 border-t border-white/5">
               <div className="flex flex-col gap-4">
                 <p className="text-white/20 text-[10px] uppercase tracking-[0.3em]">© 2026 README.3D — ALL RIGHTS RESERVED</p>
-                <div className="flex items-center gap-4">
-                  <button 
-                    onClick={testAdsterra}
-                    disabled={adsterraStatus === 'testing'}
-                    className={cn(
-                      "text-[8px] uppercase tracking-[0.2em] px-3 py-1 rounded-full border transition-all flex items-center gap-2",
-                      adsterraStatus === 'idle' && "border-white/10 text-white/40 hover:border-white/30",
-                      adsterraStatus === 'testing' && "border-indigo-500/50 text-indigo-400 animate-pulse",
-                      adsterraStatus === 'success' && "border-emerald-500/50 text-emerald-400",
-                      adsterraStatus === 'error' && "border-rose-500/50 text-rose-400"
-                    )}
-                  >
-                    <div className={cn(
-                      "w-1.5 h-1.5 rounded-full",
-                      adsterraStatus === 'idle' && "bg-white/20",
-                      adsterraStatus === 'testing' && "bg-indigo-500",
-                      adsterraStatus === 'success' && "bg-emerald-500",
-                      adsterraStatus === 'error' && "bg-rose-500"
-                    )} />
-                    Adsterra API: {adsterraStatus === 'idle' ? 'Test Connection' : adsterraStatus}
-                  </button>
-                </div>
               </div>
               <div className="flex items-center gap-2 text-white/20 text-[10px] uppercase tracking-[0.3em]">
                 <span>MADE WITH</span>
@@ -603,6 +549,7 @@ export default function App() {
       </main>
 
       {/* Modals */}
+      <AdsterraAds />
       <AnimatePresence>
         {(showPrivacy || showTerms) && (
           <motion.div 

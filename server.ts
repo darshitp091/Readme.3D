@@ -8,6 +8,20 @@ async function startServer() {
 
   app.use(express.json());
 
+  app.get("/api/health", (req, res) => {
+    res.json({ status: "ok" });
+  });
+
+  // Adsterra API Placeholder (for backend integration)
+  app.get("/api/adsterra/stats", async (req, res) => {
+    const apiKey = process.env.ADSTERRA_API_KEY;
+    if (!apiKey || apiKey === 'your_adsterra_api_key_here') {
+      return res.status(401).json({ error: "Adsterra API key not configured" });
+    }
+    // Placeholder for actual Adsterra API call
+    res.json({ message: "Adsterra API is ready for integration", configured: true });
+  });
+
   // API Route to analyze GitHub Repo
   app.post("/api/analyze-repo", async (req, res) => {
     const { repoUrl } = req.body;
@@ -77,23 +91,6 @@ async function startServer() {
     } catch (error: any) {
       console.error("Error analyzing repo:", error.message);
       res.status(500).json({ error: "Failed to analyze repository. Make sure it's public." });
-    }
-  });
-
-  // API Route to test Adsterra API
-  app.get("/api/adsterra/test", async (req, res) => {
-    const apiKey = process.env.ADSTERRA_API_KEY || "73b6b292ed780e89f620ff15c77b7ef0";
-    try {
-      // Testing with the stats endpoint
-      const response = await axios.get(`https://api3.adsterra.com/publisher/${apiKey}/stats.json`);
-      res.json({ success: true, data: response.data });
-    } catch (error: any) {
-      console.error("Adsterra API Error:", error.response?.data || error.message);
-      res.status(500).json({ 
-        success: false, 
-        error: error.response?.data?.message || "Failed to connect to Adsterra API",
-        details: error.message
-      });
     }
   });
 
