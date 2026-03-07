@@ -267,8 +267,8 @@ export default function App() {
               <Sparkles className="w-3 h-3" />
               Next-Gen Documentation
             </div>
-            <h1 className="text-7xl md:text-9xl font-bold tracking-tighter leading-[0.85] neon-text">
-              ELEVATE YOUR<br />REPOSITORY
+            <h1 className="text-7xl md:text-9xl font-bold tracking-tighter leading-[0.85] neon-text uppercase">
+              AI README<br />GENERATOR
             </h1>
             <p className="text-white/50 text-xl md:text-2xl max-w-2xl mx-auto leading-relaxed font-light">
               The world's first immersive 3D README engine. Automate your GitHub documentation workflow with Gemini-powered neural synthesis.
@@ -305,8 +305,8 @@ export default function App() {
         {/* Features Section */}
         <section id="features" className="container mx-auto px-6 py-32">
           <div className="text-center mb-24 space-y-4">
-            <h2 className="text-4xl md:text-6xl font-bold tracking-tighter">ENGINEERED FOR <span className="text-indigo-500">SPEED</span></h2>
-            <p className="text-white/40 max-w-xl mx-auto">Everything you need to make your project stand out in the developer ecosystem.</p>
+            <h2 className="text-4xl md:text-6xl font-bold tracking-tighter">ENGINEERED FOR <span className="text-indigo-500">GITHUB RANKING</span></h2>
+            <p className="text-white/40 max-w-xl mx-auto">The ultimate platform for automatic README generation, tech stack analysis, and project documentation.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -355,8 +355,8 @@ export default function App() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
               <div className="space-y-12">
                 <div className="space-y-4">
-                  <h2 className="text-5xl font-bold tracking-tighter">THE <span className="text-indigo-500">ENGINE</span></h2>
-                  <p className="text-white/50">Input your details below to begin the neural synthesis.</p>
+                  <h2 className="text-5xl font-bold tracking-tighter uppercase">NEURAL <span className="text-indigo-500">SYNTHESIS</span></h2>
+                  <p className="text-white/50">Input your repo link to trigger the AI repo analysis and generate professional documentation.</p>
                 </div>
 
                 <div className="space-y-8">
@@ -531,6 +531,117 @@ export default function App() {
             className="absolute bottom-0 left-0 w-full h-96 bg-gradient-to-t from-indigo-600/10 to-transparent -z-10"
           />
         </footer>
+
+        {/* Semantic SEO & Keyword Cloud (Optimized for Search Indexing) */}
+        <section className="py-12 border-t border-white/5 opacity-[0.02] hover:opacity-100 transition-opacity pointer-events-none select-none overflow-hidden">
+          <div className="container mx-auto px-6">
+            <h2 className="text-[10px] font-bold uppercase tracking-widest mb-4">Core Capabilities & Technical Metadata</h2>
+            <div className="flex flex-wrap gap-x-4 gap-y-2 text-[8px] font-mono leading-tight">
+              <span>github readme generator</span>
+              <span>ai readme builder</span>
+              <span>github profile readme generator</span>
+              <span>best readme generator</span>
+              <span>markdown documentation tool</span>
+              <span>automatic readme creator</span>
+              <span>project documentation ai</span>
+              <span>github profile customizer</span>
+              <span>groq ai</span>
+              <span>llama 3.3</span>
+              <span>tech stack analysis</span>
+              <span>developer tools</span>
+              <span>open source documentation</span>
+              <span>professional readme</span>
+              <span>interactive readme</span>
+              <span>dynamic github profile</span>
+              <span>github stats card</span>
+              <span>readme.md generator</span>
+              <span>automated documentation</span>
+              <span>repo analysis engine</span>
+              <span>technical writing ai</span>
+              <span>software engineering tools</span>
+              <span>high cpm tech keywords</span>
+              <span>github ranking tool</span>
+              <span>software development</span>
+              <span>custom software development</span>
+              <span>software development services</span>
+              <span>web development company</span>
+              <span>mobile app development company</span>
+              <span>app development company</span>
+              <span>IT services</span>
+              <span>IT consulting</span>
+              <span>software outsourcing</span>
+              <span>offshore software development</span>
+              <span>nearshore software development</span>
+              <span>DevOps services</span>
+              <span>cloud migration</span>
+              <span>cloud consulting</span>
+              <span>cybersecurity services</span>
+              <span>penetration testing services</span>
+              <span>QA testing services</span>
+              <span>UI UX design agency</span>
+              <span>software solutions</span>
+              <span>enterprise software development</span>
+              <span>full-stack development services</span>
+              <span>backend development services</span>
+              <span>frontend development services</span>
+              <span>custom application development</span>
+              <span>digital transformation services</span>
+              <span>managed IT services</span>
+              <span>software engineering firm</span>
+              <span>technology consulting</span>
+              <span>product development services</span>
+              <span>software development tools</span>
+              <span>CI/CD pipelines</span>
+              <span>version control systems</span>
+              <span>code collaboration platform</span>
+              <span>DevOps platforms</span>
+              <span>containerization tools</span>
+              <span>orchestration tools</span>
+              <span>cloud development environment</span>
+              <span>API management tools</span>
+              <span>security testing tools</span>
+              <span>performance monitoring tools</span>
+              <span>project management software for developers</span>
+              <span>low-code development platforms</span>
+              <span>no-code development platforms</span>
+              <span>AI development tools</span>
+              <span>machine learning platforms</span>
+              <span>data science tools</span>
+              <span>big data analytics software</span>
+              <span>quantum computing software</span>
+              <span>blockchain development tools</span>
+              <span>GitHub enterprise solutions</span>
+              <span>GitHub actions consulting</span>
+              <span>GitHub workflow automation</span>
+              <span>GitHub integration services</span>
+              <span>Git hosting for enterprises</span>
+              <span>Version control system solutions</span>
+              <span>Code repository management</span>
+              <span>Developer collaboration tools</span>
+              <span>DevSecOps GitHub</span>
+              <span>Continuous integration GitHub</span>
+              <span>Continuous delivery GitHub</span>
+              <span>GitHub security scanning</span>
+              <span>GitHub compliance solutions</span>
+              <span>Open source project management</span>
+              <span>Code review tools GitHub</span>
+              <span>GitHub migration services</span>
+              <span>Cloud-native development GitHub</span>
+              <span>Microservices development GitHub</span>
+              <span>Serverless computing GitHub</span>
+              <span>Infrastructure as Code GitHub</span>
+              <span>how to create GitHub README</span>
+              <span>best GitHub README builder</span>
+              <span>easy README generator</span>
+              <span>README generator with stats</span>
+              <span>github coding assistant</span>
+              <span>generative ai for developers</span>
+              <span>ai code review</span>
+              <span>open source ai frameworks</span>
+              <span>agentic ai middleware</span>
+            </div>
+          </div>
+        </section>
       </main>
 
       {/* Modals */}
