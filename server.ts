@@ -2,14 +2,29 @@ import express from "express";
 import { createServer as createViteServer } from "vite";
 import axios from "axios";
 
+console.log("Starting server.ts...");
+
 async function startServer() {
+  console.log("Initializing Express app...");
   const app = express();
   const PORT = 3000;
 
   app.use(express.json());
 
+  console.log("Registering API routes...");
   app.get("/api/health", (req, res) => {
+    console.log("GET /api/health hit");
     res.json({ status: "ok" });
+  });
+
+  app.get("/api/test", (req, res) => {
+    res.json({ message: "API is working" });
+  });
+
+  // Debug catch-all for /api
+  app.use("/api/*", (req, res, next) => {
+    console.log(`API Request: ${req.method} ${req.originalUrl}`);
+    next();
   });
 
   // Adsterra API Placeholder (for backend integration)
@@ -24,6 +39,7 @@ async function startServer() {
 
   // API Route to analyze GitHub Repo
   app.post("/api/analyze-repo", async (req, res) => {
+    console.log("POST /api/analyze-repo received", req.body);
     const { repoUrl } = req.body;
     if (!repoUrl) return res.status(400).json({ error: "Repo URL is required" });
 

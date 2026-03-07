@@ -8,9 +8,8 @@ export const Scene = () => {
   const groupRef = useRef<THREE.Group>(null);
   const timer = useMemo(() => new THREE.Timer(), []);
 
-  useFrame((state) => {
-    timer.update(state.clock.elapsedTime);
-    const t = timer.getElapsed();
+  useFrame((state, delta) => {
+    const t = state.clock.getElapsedTime();
     const scrollY = window.scrollY;
     const windowHeight = window.innerHeight;
     const documentHeight = document.documentElement.scrollHeight;

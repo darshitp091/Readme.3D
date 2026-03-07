@@ -70,7 +70,9 @@ export default function App() {
     setIsAnalyzing(true);
     setError(null);
     try {
+      console.log('Analyzing repo:', repoUrl, 'on origin:', window.location.origin);
       const response = await axios.post('/api/analyze-repo', { repoUrl });
+      console.log('Analyze response:', response.data);
       const data = { ...response.data, repoUrl }; // Add repoUrl to info
       setRepoInfo(data);
       
@@ -101,7 +103,12 @@ export default function App() {
 
       setProjectDetails(summary);
     } catch (err: any) {
-      setError(err.response?.data?.error || 'Failed to analyze repository');
+      console.error('Analyze error:', err);
+      const errorData = err.response?.data?.error;
+      const errorMessage = typeof errorData === 'string' 
+        ? errorData 
+        : (typeof errorData === 'object' ? JSON.stringify(errorData) : (err.message || 'Failed to analyze repository'));
+      setError(errorMessage);
     } finally {
       setIsAnalyzing(false);
     }
@@ -124,7 +131,8 @@ export default function App() {
       // Scroll to generator output
       document.getElementById('generator-output')?.scrollIntoView({ behavior: 'smooth' });
     } catch (err: any) {
-      const msg = err.message || 'Generation failed';
+      console.error('Generation error:', err);
+      const msg = typeof err.message === 'string' ? err.message : 'Generation failed';
       setError(msg);
       if (msg.includes('API key') || msg.includes('401') || msg.includes('403') || msg.includes('not found')) {
         setApiKeyMissing(true);
