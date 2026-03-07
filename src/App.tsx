@@ -19,6 +19,7 @@ import {
 import Markdown from 'react-markdown';
 import confetti from 'canvas-confetti';
 import axios from 'axios';
+import { Analytics } from "@vercel/analytics/react";
 
 import { Scene } from './components/Scene';
 import { generateREADME, RepoInfo } from './services/ai';
@@ -742,6 +743,7 @@ export default function App() {
           </motion.div>
         )}
       </AnimatePresence>
+      <Analytics />
     </div>
   );
 }
