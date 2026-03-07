@@ -448,7 +448,7 @@ export default function App() {
         </section>
 
         {/* Footer Section */}
-        <footer className="relative border-t border-white/5 bg-white/[0.01] backdrop-blur-3xl pt-24 pb-12 overflow-hidden">
+        <footer className="relative z-20 border-t border-white/5 bg-[#050505] backdrop-blur-3xl pt-24 pb-12 overflow-hidden mt-20">
           <motion.div
             initial={{ opacity: 0, scaleX: 0 }}
             whileInView={{ opacity: 1, scaleX: 1 }}
@@ -533,7 +533,7 @@ export default function App() {
         </footer>
 
         {/* Semantic SEO & Keyword Cloud (Optimized for Search Indexing) */}
-        <section className="py-12 border-t border-white/5 opacity-[0.02] hover:opacity-100 transition-opacity pointer-events-none select-none overflow-hidden">
+        <section className="relative z-10 py-12 border-t border-white/5 opacity-[0.02] hover:opacity-100 transition-opacity select-none overflow-hidden bg-[#050505]">
           <div className="container mx-auto px-6">
             <h2 className="text-[10px] font-bold uppercase tracking-widest mb-4">Core Capabilities & Technical Metadata</h2>
             <div className="flex flex-wrap gap-x-4 gap-y-2 text-[8px] font-mono leading-tight">
