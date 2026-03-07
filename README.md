@@ -1,29 +1,29 @@
 # 🚀 README.3D - AI-Powered Documentation Generator
 
-README.3D is a modern, high-performance web application designed to automate the creation of professional `README.md` files. Powered by **Gemini 3 Flash**, it analyzes your project context or descriptions to generate stunning, well-structured documentation in seconds.
+README.3D is a modern, high-performance web application designed to automate the creation of professional `README.md` files. Powered by **Groq AI (Llama 3.3)**, it analyzes your project context or repositories to generate stunning, well-structured documentation in seconds.
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![React](https://img.shields.io/badge/React-19-blue)
 ![Tailwind](https://img.shields.io/badge/Tailwind-4.0-teal)
-![Gemini](https://img.shields.io/badge/AI-Gemini%203%20Flash-orange)
+![Groq](https://img.shields.io/badge/AI-Groq%20Llama%203.3-orange)
 
 ## ✨ Features
 
-- **🤖 AI-Driven Generation**: Leverages the latest Gemini 3 Flash model for intelligent content creation.
-- **👁️ Real-time Preview**: See your documentation come to life as it's being generated with a built-in Markdown renderer.
-- **🎨 Modern UI**: A sleek, responsive interface built with Tailwind CSS 4 and Framer Motion for smooth transitions.
+- **🤖 AI-Driven Generation**: Leverages the lightning-fast Groq API for intelligent content creation.
+- **👁️ Real-time Preview**: See your documentation come to life with a built-in Markdown renderer.
+- **🎨 Modern UI**: A sleek, immersive 3D interface built with React 19, Tailwind CSS 4, and Three.js.
 - **📋 One-Click Copy**: Instantly copy generated markdown to your clipboard.
-- **🛠️ Tech Stack Analysis**: Automatically suggests sections based on your project's technology.
-- **✨ Interactive Elements**: Confetti celebrations upon successful generation!
+- **🛠️ Tech Stack Analysis**: Deep analysis of GitHub repositories to automatically suggest sections.
+- **✨ Interactive Elements**: Professional Shields.io badges and engaging transitions.
 
 ## 🛠️ Tech Stack
 
 - **Frontend**: [React 19](https://react.dev/), [Vite](https://vitejs.dev/)
-- **Styling**: [Tailwind CSS 4](https://tailwindcss.com/), [Lucide Icons](https://lucide.dev/)
+- **Styling**: [Tailwind CSS 4](https://tailwindcss.com/)
+- **3D Graphics**: [Three.js](https://threejs.org/), [@react-three/fiber](https://docs.pmnd.rs/react-three-fiber)
 - **Animation**: [Framer Motion](https://www.framer.com/motion/)
-- **AI Engine**: [@google/genai](https://ai.google.dev/) (Gemini 3 Flash)
-- **Backend**: [Express](https://expressjs.com/) (serving as a lightweight proxy/server)
-- **Markdown Rendering**: [react-markdown](https://github.com/remarkjs/react-markdown)
+- **AI Engine**: [Groq SDK](https://groq.com/) (Llama 3.3 70B)
+- **Deployment**: [Vercel](https://vercel.com/) (Serverless API Routes)
 
 ## 🚀 Getting Started
 
@@ -31,14 +31,14 @@ README.3D is a modern, high-performance web application designed to automate the
 
 - Node.js (v18 or higher)
 - npm or yarn
-- A Gemini API Key (set in your environment)
+- A Groq API Key (set in your environment)
 
 ### Installation
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/your-username/readme-3d.git
-   cd readme-3d
+   git clone https://github.com/darshitp091/Readme.3D.git
+   cd Readme.3D
    ```
 
 2. **Install dependencies**
@@ -49,7 +49,7 @@ README.3D is a modern, high-performance web application designed to automate the
 3. **Set up environment variables**
    Create a `.env` file in the root directory:
    ```env
-   GEMINI_API_KEY=your_api_key_here
+   GROQ_API_KEY=your_api_key_here
    ```
 
 4. **Run the development server**
@@ -64,11 +64,10 @@ README.3D is a modern, high-performance web application designed to automate the
 
 ## 📖 Usage
 
-1. Enter your project name and a brief description of what your project does.
-2. Select the core technologies used in your project.
-3. Click **"Generate Documentation"**.
-4. Watch the AI craft your README in real-time.
-5. Review the preview, make any manual adjustments if needed, and click **"Copy to Clipboard"**.
+1. Enter your GitHub repository URL and click **"Analyze"**.
+2. Review the automatically generated project context.
+3. Click **"Generate Masterpiece"**.
+4. Use the **Editor** to tweak the markdown or **Download/Copy** it immediately.
 
 ## 🤝 Contributing
 
@@ -80,4 +79,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-Built with ❤️ by the README.3D Team.
+Built with ❤️ by [darshitp091](https://github.com/darshitp091).

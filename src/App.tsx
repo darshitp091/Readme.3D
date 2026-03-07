@@ -37,6 +37,7 @@ export default function App() {
 
   const [showPrivacy, setShowPrivacy] = useState(false);
   const [showTerms, setShowTerms] = useState(false);
+  const [showLicense, setShowLicense] = useState(false);
 
   // Loading States
   const [loadingProgress, setLoadingProgress] = useState(0);
@@ -233,7 +234,7 @@ export default function App() {
         )}>
           <a href="#features" className="hover:text-white transition-colors">Features</a>
           <a href="#generator" className="hover:text-white transition-colors">Generator</a>
-          <a href="https://github.com" target="_blank" className="hover:text-white transition-colors flex items-center gap-2">
+          <a href="https://github.com/darshitp091/Readme.3D" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors flex items-center gap-2">
             <Github className="w-4 h-4" /> Open Source
           </a>
         </div>
@@ -280,8 +281,9 @@ export default function App() {
                 Start Generating <ArrowRight className="w-5 h-5" />
               </button>
               <a
-                href="https://github.com"
+                href="https://github.com/darshitp091/Readme.3D"
                 target="_blank"
+                rel="noopener noreferrer"
                 className="w-full sm:w-auto px-10 py-5 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all font-bold text-lg flex items-center justify-center gap-3"
               >
                 <Github className="w-5 h-5" /> View on GitHub
@@ -471,14 +473,8 @@ export default function App() {
                   The ultimate open-source documentation engine. Built for developers who value their time and project presentation.
                 </p>
                 <div className="flex items-center gap-4">
-                  <a href="https://github.com" target="_blank" className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-indigo-500 hover:border-indigo-500 transition-all group">
+                  <a href="https://github.com/darshitp091/Readme.3D" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-indigo-500 hover:border-indigo-500 transition-all group">
                     <Github className="w-5 h-5 text-white/40 group-hover:text-white" />
-                  </a>
-                  <a href="#" className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-indigo-500 hover:border-indigo-500 transition-all group">
-                    <Globe className="w-5 h-5 text-white/40 group-hover:text-white" />
-                  </a>
-                  <a href="#" className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-indigo-500 hover:border-indigo-500 transition-all group">
-                    <ExternalLink className="w-5 h-5 text-white/40 group-hover:text-white" />
                   </a>
                 </div>
               </div>
@@ -488,8 +484,7 @@ export default function App() {
                 <ul className="space-y-4 text-sm text-white/40">
                   <li><a href="#features" className="hover:text-white transition-colors">Features</a></li>
                   <li><a href="#generator" className="hover:text-white transition-colors">Generator</a></li>
-                  <li><a href="#" className="hover:text-white transition-colors">Open Source</a></li>
-                  <li><a href="#" className="hover:text-white transition-colors">Documentation</a></li>
+                  <li><a href="https://github.com/darshitp091/Readme.3D" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Open Source</a></li>
                 </ul>
               </div>
 
@@ -498,15 +493,16 @@ export default function App() {
                 <ul className="space-y-4 text-sm text-white/40">
                   <li><button onClick={() => setShowPrivacy(true)} className="hover:text-white transition-colors">Privacy Policy</button></li>
                   <li><button onClick={() => setShowTerms(true)} className="hover:text-white transition-colors">Terms of Service</button></li>
-                  <li><a href="#" className="hover:text-white transition-colors">Cookie Policy</a></li>
-                  <li><a href="#" className="hover:text-white transition-colors">License</a></li>
                 </ul>
               </div>
             </div>
 
             <div className="flex flex-col md:flex-row items-center justify-between gap-8 pt-12 border-t border-white/5">
               <div className="flex flex-col gap-4">
-                <p className="text-white/20 text-[10px] uppercase tracking-[0.3em]">© 2026 README.3D — ALL RIGHTS RESERVED</p>
+                <div className="flex items-center gap-4">
+                  <p className="text-white/20 text-[10px] uppercase tracking-[0.3em]">© 2026 README.3D — ALL RIGHTS RESERVED</p>
+                  <button onClick={() => setShowLicense(true)} className="text-indigo-400/40 hover:text-indigo-400 text-[10px] uppercase tracking-[0.3em] transition-colors font-bold">MIT License</button>
+                </div>
               </div>
               <div className="flex items-center gap-2 text-white/20 text-[10px] uppercase tracking-[0.3em]">
                 <span>MADE WITH</span>
@@ -539,7 +535,7 @@ export default function App() {
 
       {/* Modals */}
       <AnimatePresence>
-        {(showPrivacy || showTerms) && (
+        {(showPrivacy || showTerms || showLicense) && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -553,18 +549,34 @@ export default function App() {
               className="glass-panel max-w-2xl w-full p-8 relative max-h-[80vh] overflow-y-auto custom-scrollbar"
             >
               <button
-                onClick={() => { setShowPrivacy(false); setShowTerms(false); }}
+                onClick={() => { setShowPrivacy(false); setShowTerms(false); setShowLicense(false); }}
                 className="absolute top-6 right-6 text-white/40 hover:text-white"
               >
                 ✕
               </button>
-              <h2 className="text-3xl font-bold mb-6">{showPrivacy ? 'Privacy Policy' : 'Terms of Service'}</h2>
-              <div className="prose prose-invert text-white/60">
-                <p>This is an open-source project. Your data is handled with care.</p>
-                <p>We do not store your repository details or generated markdown on our servers. All processing is done in real-time via the Gemini API.</p>
-                <p>By using this tool, you agree to the standard open-source license terms.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-              </div>
+
+              {showLicense ? (
+                <>
+                  <h2 className="text-3xl font-bold mb-6 italic">MIT License</h2>
+                  <div className="prose prose-invert text-white/60 font-mono text-sm leading-relaxed">
+                    <p className="mb-4">MIT License</p>
+                    <p className="mb-4">Copyright (c) 2026 README.3D Team</p>
+                    <p className="mb-4">Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
+                    <p className="mb-4">The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+                    <p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <h2 className="text-3xl font-bold mb-6">{showPrivacy ? 'Privacy Policy' : 'Terms of Service'}</h2>
+                  <div className="prose prose-invert text-white/60">
+                    <p>This is an open-source project. Your data is handled with care.</p>
+                    <p>We do not store your repository details or generated markdown on our servers. All processing is done in real-time via the Groq API.</p>
+                    <p>By using this tool, you agree to the standard open-source license terms.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                  </div>
+                </>
+              )}
             </motion.div>
           </motion.div>
         )}
