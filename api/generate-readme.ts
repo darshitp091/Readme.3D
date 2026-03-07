@@ -15,6 +15,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         apiKey: process.env.GROQ_API_KEY
     });
 
+    if (!process.env.GROQ_API_KEY) {
+        return res.status(500).json({ error: "GROQ_API_KEY is not configured in Vercel environment variables." });
+    }
+
     const prompt = `
     You are an expert technical writer and developer. Generate a stunning, professional, and well-structured README.md file for the following project.
     
@@ -80,7 +84,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     try {
         const completion = await groq.chat.completions.create({
             messages: [{ role: "user", content: prompt }],
-            model: "llama-3.3-70b-specdec",
+            model: "llama-3.3-70b-versatile",
             temperature: 0.7,
             max_tokens: 4096,
         });
@@ -89,6 +93,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         res.json({ markdown });
     } catch (error: any) {
         console.error("Groq Generation Error:", error);
-        res.status(500).json({ error: "Failed to generate README using Groq AI." });
+        res.status(500).json({ error: `Groq AI Error: ${error.message || "Failed to generate README."}` });
     }
 }
