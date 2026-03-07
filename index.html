@@ -9,48 +9,8 @@
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
     <!-- Adsterra Ads Integration -->
-    <script type="text/javascript">
-      (function() {
-        // Vite will replace these placeholders during the build process
-        // if the environment variables are set.
-        var popunder = "%VITE_ADSTERRA_POPUNDER_URL%";
-        var socialbar = "%VITE_ADSTERRA_SOCIALBAR_URL%";
-        
-        // Safety check: If Vite didn't replace the placeholders (they still contain the variable name)
-        // or if they are empty, or if they contain placeholder text, we don't try to load them.
-        function isValid(url) {
-          if (!url) return false;
-          if (url.includes('VITE_ADSTERRA')) return false;
-          if (url.includes('your_') && url.includes('_here')) return false;
-          if (url === "") return false;
-          return true;
-        }
-
-        if (!isValid(popunder)) popunder = null;
-        if (!isValid(socialbar)) socialbar = null;
-
-        console.log('[Adsterra] Script URLs detected:', { 
-          popunder: popunder ? 'Detected' : 'Missing', 
-          socialbar: socialbar ? 'Detected' : 'Missing' 
-        });
-
-        if (popunder) {
-          var s = document.createElement('script');
-          s.src = popunder;
-          s.async = true;
-          s.onerror = function() { console.error('[Adsterra] Failed to load Popunder script from:', popunder); };
-          document.body.appendChild(s);
-        }
-        
-        if (socialbar) {
-          var s = document.createElement('script');
-          s.src = socialbar;
-          s.async = true;
-          s.onerror = function() { console.error('[Adsterra] Failed to load Social Bar script from:', socialbar); };
-          document.body.appendChild(s);
-        }
-      })();
-    </script>
+    <script type='text/javascript' src='https://pl28859581.effectivegatecpm.com/80/ab/db/80abdb189015eb293fed0d80003f59b6.js'></script>
+    <script type='text/javascript' src='https://pl28859648.effectivegatecpm.com/4d/1b/15/4d1b1538f6d203b1a5bf9d5ff06e7f32.js'></script>
   </body>
 </html>
 

@@ -45,15 +45,6 @@ export default function App() {
   const [showContent, setShowContent] = useState(false);
 
   useEffect(() => {
-    // Debug: Log Adsterra environment variables to verify they are being read correctly
-    console.log('[Adsterra] Environment Variables Check:');
-    console.log(' - Popunder URL:', import.meta.env.VITE_ADSTERRA_POPUNDER_URL || 'NOT SET');
-    console.log(' - Social Bar URL:', import.meta.env.VITE_ADSTERRA_SOCIALBAR_URL || 'NOT SET');
-    
-    if (!import.meta.env.VITE_ADSTERRA_POPUNDER_URL && !import.meta.env.VITE_ADSTERRA_SOCIALBAR_URL) {
-      console.warn('[Adsterra] Both URLs are missing. Ensure you have set VITE_ADSTERRA_POPUNDER_URL and VITE_ADSTERRA_SOCIALBAR_URL in your deployment platform.');
-    }
-    
     const interval = setInterval(() => {
       setLoadingProgress(prev => {
         if (prev >= 100) {
