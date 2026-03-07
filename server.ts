@@ -1,6 +1,7 @@
 import express from "express";
 import { createServer as createViteServer } from "vite";
 import axios from "axios";
+import cors from "cors";
 
 console.log("Starting server.ts...");
 
@@ -10,6 +11,7 @@ async function startServer() {
   const app = express();
   const PORT = 3000;
 
+  app.use(cors());
   app.use(express.json());
 
   console.log("Registering API routes...");
