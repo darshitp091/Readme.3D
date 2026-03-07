@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { motion, AnimatePresence } from 'motion/react';
-import { 
-  Github, 
-  Sparkles, 
-  Copy, 
-  Check, 
-  Terminal, 
-  ArrowRight, 
-  Edit3, 
-  Eye, 
+import {
+  Github,
+  Sparkles,
+  Copy,
+  Check,
+  Terminal,
+  ArrowRight,
+  Edit3,
+  Eye,
   Download,
   ExternalLink,
   Cpu,
@@ -34,11 +34,10 @@ export default function App() {
   const [copied, setCopied] = useState(false);
   const [repoInfo, setRepoInfo] = useState<RepoInfo | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [apiKeyMissing, setApiKeyMissing] = useState(false);
 
   const [showPrivacy, setShowPrivacy] = useState(false);
   const [showTerms, setShowTerms] = useState(false);
-  
+
   // Loading States
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -77,28 +76,28 @@ export default function App() {
       console.log('Analyze response:', response.data);
       const data = { ...response.data, repoUrl }; // Add repoUrl to info
       setRepoInfo(data);
-      
+
       // Build a rich summary for the context field
       let summary = `Repository: ${data.name}\n`;
       summary += `Full Name: ${data.fullName}\n`;
       summary += `Description: ${data.description || 'No description provided.'}\n`;
       summary += `Stats: ⭐ ${data.stars} | 🍴 ${data.forks} | 📜 ${data.license || 'None'}\n\n`;
-      
+
       if (data.packageJson) {
         summary += `Tech Stack (from package.json):\n`;
         const deps = Object.keys(data.packageJson.dependencies || {}).slice(0, 10);
         if (deps.length) summary += `- Key Dependencies: ${deps.join(', ')}\n`;
-        
+
         const scripts = Object.keys(data.packageJson.scripts || {});
         if (scripts.length) summary += `- Available Scripts: ${scripts.join(', ')}\n`;
-        
+
         if (data.packageJson.version) summary += `- Version: ${data.packageJson.version}\n`;
         summary += `\n`;
       }
-      
+
       summary += `Languages: ${data.languages.join(', ')}\n`;
       summary += `Files: ${data.files}\n\n`;
-      
+
       if (data.existingReadme) {
         summary += `Existing README found. Analyzing for features and usage...\n`;
       }
@@ -107,8 +106,8 @@ export default function App() {
     } catch (err: any) {
       console.error('Analyze error:', err);
       const errorData = err.response?.data?.error;
-      const errorMessage = typeof errorData === 'string' 
-        ? errorData 
+      const errorMessage = typeof errorData === 'string'
+        ? errorData
         : (typeof errorData === 'object' ? JSON.stringify(errorData) : (err.message || 'Failed to analyze repository'));
       setError(errorMessage);
     } finally {
@@ -136,23 +135,12 @@ export default function App() {
       console.error('Generation error:', err);
       const msg = typeof err.message === 'string' ? err.message : 'Generation failed';
       setError(msg);
-      if (msg.includes('API key') || msg.includes('401') || msg.includes('403') || msg.includes('not found')) {
-        setApiKeyMissing(true);
-      }
     } finally {
       setIsGenerating(false);
     }
   };
 
-  const handleOpenKeySelector = async () => {
-    if (window.aistudio?.openSelectKey) {
-      await window.aistudio.openSelectKey();
-      setError(null);
-      setApiKeyMissing(false);
-    } else {
-      setError("API Key selection is not available in this environment. Please set GEMINI_API_KEY in your .env file.");
-    }
-  };
+
 
   const handleCopy = () => {
     navigator.clipboard.writeText(generatedMarkdown);
@@ -162,7 +150,7 @@ export default function App() {
 
   const handleDownload = () => {
     const element = document.createElement("a");
-    const file = new Blob([generatedMarkdown], {type: 'text/markdown'});
+    const file = new Blob([generatedMarkdown], { type: 'text/markdown' });
     element.href = URL.createObjectURL(file);
     element.download = "README.md";
     document.body.appendChild(element);
@@ -196,7 +184,7 @@ export default function App() {
 
               <div className="w-64 md:w-80 space-y-4">
                 <div className="h-[2px] w-full bg-white/5 rounded-full overflow-hidden relative">
-                  <motion.div 
+                  <motion.div
                     initial={{ width: 0 }}
                     animate={{ width: `${loadingProgress}%` }}
                     className="absolute inset-y-0 left-0 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 shadow-[0_0_15px_rgba(99,102,241,0.5)]"
@@ -233,7 +221,7 @@ export default function App() {
         "glass-header px-8 py-4 flex items-center justify-between transition-all duration-1000",
         isLoaded ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-full"
       )}>
-        <div 
+        <div
           className="flex items-center gap-3 cursor-pointer"
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         >
@@ -249,7 +237,7 @@ export default function App() {
             <Github className="w-4 h-4" /> Open Source
           </a>
         </div>
-        <button 
+        <button
           onClick={() => document.getElementById('generator')?.scrollIntoView({ behavior: 'smooth' })}
           className={cn(
             "px-6 py-2.5 rounded-full bg-white text-black text-xs font-bold hover:bg-indigo-50 transition-all active:scale-95 duration-1000 delay-500",
@@ -265,10 +253,10 @@ export default function App() {
         "relative z-10 transition-all duration-1000 delay-700",
         showContent ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
       )}>
-        
+
         {/* Hero Section */}
         <section className="min-h-[90vh] flex flex-col items-center justify-center text-center px-6">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -285,14 +273,14 @@ export default function App() {
               The world's first immersive 3D README engine. Automate your GitHub documentation workflow with Gemini-powered neural synthesis.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8">
-              <button 
+              <button
                 onClick={() => document.getElementById('generator')?.scrollIntoView({ behavior: 'smooth' })}
                 className="w-full sm:w-auto px-10 py-5 rounded-2xl bg-indigo-600 hover:bg-indigo-500 transition-all font-bold text-lg flex items-center justify-center gap-3 shadow-2xl shadow-indigo-500/40"
               >
                 Start Generating <ArrowRight className="w-5 h-5" />
               </button>
-              <a 
-                href="https://github.com" 
+              <a
+                href="https://github.com"
                 target="_blank"
                 className="w-full sm:w-auto px-10 py-5 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all font-bold text-lg flex items-center justify-center gap-3"
               >
@@ -300,8 +288,8 @@ export default function App() {
               </a>
             </div>
           </motion.div>
-          
-          <motion.div 
+
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1 }}
@@ -318,9 +306,9 @@ export default function App() {
             <h2 className="text-4xl md:text-6xl font-bold tracking-tighter">ENGINEERED FOR <span className="text-indigo-500">SPEED</span></h2>
             <p className="text-white/40 max-w-xl mx-auto">Everything you need to make your project stand out in the developer ecosystem.</p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -331,7 +319,7 @@ export default function App() {
               <p className="text-white/50 leading-relaxed">Our AI doesn't just read code; it understands the soul of your project to write documentation that resonates.</p>
             </motion.div>
 
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -343,7 +331,7 @@ export default function App() {
               <p className="text-white/50 leading-relaxed">Why work in 2D? Our immersive environment keeps you focused and inspired while you build your brand.</p>
             </motion.div>
 
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -361,7 +349,7 @@ export default function App() {
         <section id="generator" className="container mx-auto px-6 py-32">
           <div className="glass-panel p-12 relative overflow-hidden">
             <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-600/10 blur-[120px] -z-10" />
-            
+
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
               <div className="space-y-12">
                 <div className="space-y-4">
@@ -376,28 +364,20 @@ export default function App() {
                         <AlertCircle className="w-4 h-4" />
                         <span className="flex-1">{error}</span>
                       </div>
-                      {apiKeyMissing && (
-                        <button 
-                          onClick={handleOpenKeySelector}
-                          className="flex items-center justify-center gap-2 px-4 py-2 bg-red-500/20 hover:bg-red-500/30 border border-red-500/30 rounded-xl text-xs font-bold transition-all"
-                        >
-                          <Cpu className="w-3 h-3" /> Configure API Key
-                        </button>
-                      )}
                     </div>
                   )}
 
                   <div className="space-y-4">
                     <label className="text-[10px] font-bold uppercase tracking-widest text-indigo-400">GitHub Repository</label>
                     <div className="relative group">
-                      <input 
-                        type="text" 
+                      <input
+                        type="text"
                         value={repoUrl}
                         onChange={(e) => setRepoUrl(e.target.value)}
                         placeholder="https://github.com/username/repo"
                         className="w-full bg-white/[0.03] border border-white/10 rounded-2xl px-6 py-5 focus:outline-none focus:border-indigo-500/50 transition-all font-mono text-sm"
                       />
-                      <button 
+                      <button
                         onClick={handleAnalyze}
                         disabled={isAnalyzing || !repoUrl}
                         className="absolute right-2 top-2 bottom-2 px-6 rounded-xl bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 transition-all flex items-center gap-2 text-xs font-bold"
@@ -409,7 +389,7 @@ export default function App() {
 
                   <div className="space-y-4">
                     <label className="text-[10px] font-bold uppercase tracking-widest text-pink-400">Project Context</label>
-                    <textarea 
+                    <textarea
                       value={projectDetails}
                       onChange={(e) => setProjectDetails(e.target.value)}
                       placeholder="What makes this project special?"
@@ -417,7 +397,7 @@ export default function App() {
                     />
                   </div>
 
-                  <button 
+                  <button
                     onClick={handleGenerate}
                     disabled={isGenerating || (!projectDetails && !repoInfo)}
                     className="w-full py-6 rounded-2xl bg-gradient-to-r from-indigo-600 to-pink-600 hover:scale-[1.02] active:scale-[0.98] transition-all font-bold text-xl flex items-center justify-center gap-4 shadow-2xl shadow-indigo-500/20"
@@ -467,15 +447,15 @@ export default function App() {
 
         {/* Footer Section */}
         <footer className="relative border-t border-white/5 bg-white/[0.01] backdrop-blur-3xl pt-24 pb-12 overflow-hidden">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scaleX: 0 }}
             whileInView={{ opacity: 1, scaleX: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 1.5, ease: "circOut" }}
-            className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-indigo-500/50 to-transparent origin-center" 
+            className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-indigo-500/50 to-transparent origin-center"
           />
-          
-          <motion.div 
+
+          <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -542,17 +522,17 @@ export default function App() {
           </motion.div>
 
           {/* Animated Footer Background */}
-          <motion.div 
-            animate={{ 
+          <motion.div
+            animate={{
               opacity: [0.3, 0.6, 0.3],
               scale: [1, 1.05, 1]
             }}
-            transition={{ 
-              duration: 8, 
-              repeat: Infinity, 
-              ease: "easeInOut" 
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut"
             }}
-            className="absolute bottom-0 left-0 w-full h-96 bg-gradient-to-t from-indigo-600/10 to-transparent -z-10" 
+            className="absolute bottom-0 left-0 w-full h-96 bg-gradient-to-t from-indigo-600/10 to-transparent -z-10"
           />
         </footer>
       </main>
@@ -560,19 +540,19 @@ export default function App() {
       {/* Modals */}
       <AnimatePresence>
         {(showPrivacy || showTerms) && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/80 backdrop-blur-sm"
           >
-            <motion.div 
+            <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               className="glass-panel max-w-2xl w-full p-8 relative max-h-[80vh] overflow-y-auto custom-scrollbar"
             >
-              <button 
+              <button
                 onClick={() => { setShowPrivacy(false); setShowTerms(false); }}
                 className="absolute top-6 right-6 text-white/40 hover:text-white"
               >
