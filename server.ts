@@ -13,6 +13,9 @@ async function startServer() {
   console.log("Initializing Express app...");
   const app = express();
   const PORT = process.env.PORT || 3000;
+  const VERCEL_URL = process.env.VITE_APP_URL || process.env.APP_URL || "";
+
+  console.log(`Server starting on port ${PORT}. Canonical URL: ${VERCEL_URL}`);
 
   // Comprehensive CORS configuration
   app.use(cors({
@@ -53,7 +56,7 @@ async function startServer() {
       const langResponse = await axios.get(`https://api.github.com/repos/${owner}/${cleanRepo}/languages`);
       const contentsResponse = await axios.get(`https://api.github.com/repos/${owner}/${cleanRepo}/contents`);
       const files = contentsResponse.data.map((f: any) => f.name);
-      
+
       let packageJson = null;
       if (files.includes("package.json")) {
         try {
@@ -104,7 +107,7 @@ async function startServer() {
   // New API Route to generate README using Groq
   app.post("/api/generate-readme", async (req, res) => {
     const { projectDetails, repoInfo } = req.body;
-    
+
     if (!projectDetails && !repoInfo) {
       return res.status(400).json({ error: "Project details or repo info is required" });
     }
@@ -207,7 +210,7 @@ async function startServer() {
     });
   }
 
-  app.listen(PORT, "0.0.0.0", () => {
+  app.listen(Number(PORT), "0.0.0.0", () => {
     console.log(`Server running on http://localhost:${PORT}`);
   });
 }

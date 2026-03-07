@@ -69,8 +69,8 @@ export default function App() {
     setIsAnalyzing(true);
     setError(null);
     try {
-      // Use APP_URL if provided, otherwise use relative path
-      const baseUrl = process.env.APP_URL ? process.env.APP_URL.replace(/\/$/, '') : '';
+      // Use VITE_APP_URL if provided, otherwise use relative path
+      const baseUrl = import.meta.env.VITE_APP_URL ? import.meta.env.VITE_APP_URL.replace(/\/$/, '') : '';
       console.log('Analyzing repo:', repoUrl, 'on origin:', window.location.origin, 'using baseUrl:', baseUrl);
       const response = await axios.post(`${baseUrl}/api/analyze-repo`, { repoUrl });
       console.log('Analyze response:', response.data);
@@ -119,7 +119,6 @@ export default function App() {
     if (!projectDetails && !repoInfo) return;
     setIsGenerating(true);
     setError(null);
-    setApiKeyMissing(false);
     try {
       const markdown = await generateREADME(projectDetails, repoInfo || undefined);
       setGeneratedMarkdown(markdown || '');

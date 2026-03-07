@@ -18,7 +18,7 @@ export interface RepoInfo {
 
 export async function generateREADME(projectDetails: string, repoInfo?: RepoInfo) {
   try {
-    const baseUrl = process.env.APP_URL ? process.env.APP_URL.replace(/\/$/, '') : '';
+    const baseUrl = import.meta.env.VITE_APP_URL ? import.meta.env.VITE_APP_URL.replace(/\/$/, '') : '';
     console.log('Generating README via backend using baseUrl:', baseUrl);
 
     const response = await axios.post(`${baseUrl}/api/generate-readme`, {
