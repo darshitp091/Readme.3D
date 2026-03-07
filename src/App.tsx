@@ -66,6 +66,26 @@ export default function App() {
     }
   }, [isLoaded]);
 
+  // Dynamic Adsterra Injection (URL-based from Environment Variables)
+  useEffect(() => {
+    const popunderUrl = import.meta.env.VITE_ADSTERRA_POPUNDER_URL;
+    const socialBarUrl = import.meta.env.VITE_ADSTERRA_SOCIALBAR_URL;
+
+    if (popunderUrl) {
+      const script = document.createElement('script');
+      script.src = popunderUrl;
+      script.type = 'text/javascript';
+      document.head.appendChild(script);
+    }
+
+    if (socialBarUrl) {
+      const script = document.createElement('script');
+      script.src = socialBarUrl;
+      script.type = 'text/javascript';
+      document.body.prepend(script);
+    }
+  }, []);
+
   const handleAnalyze = async () => {
     if (!repoUrl) return;
     setIsAnalyzing(true);
