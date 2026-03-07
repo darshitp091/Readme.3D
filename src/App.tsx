@@ -70,8 +70,9 @@ export default function App() {
     setIsAnalyzing(true);
     setError(null);
     try {
+      const baseUrl = ''; // Use relative path for API calls to ensure it works on any domain
       console.log('Analyzing repo:', repoUrl, 'on origin:', window.location.origin);
-      const response = await axios.post('/api/analyze-repo', { repoUrl });
+      const response = await axios.post(`${baseUrl}/api/analyze-repo`, { repoUrl });
       console.log('Analyze response:', response.data);
       const data = { ...response.data, repoUrl }; // Add repoUrl to info
       setRepoInfo(data);

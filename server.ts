@@ -6,6 +6,7 @@ console.log("Starting server.ts...");
 
 async function startServer() {
   console.log("Initializing Express app...");
+  console.log("APP_URL:", process.env.APP_URL);
   const app = express();
   const PORT = 3000;
 
