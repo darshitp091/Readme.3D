@@ -21,7 +21,6 @@ import confetti from 'canvas-confetti';
 import axios from 'axios';
 
 import { Scene } from './components/Scene';
-import { AdsterraAds } from './components/AdsterraAds';
 import { generateREADME, RepoInfo } from './services/ai';
 import { cn } from './lib/utils';
 
@@ -46,6 +45,15 @@ export default function App() {
   const [showContent, setShowContent] = useState(false);
 
   useEffect(() => {
+    // Debug: Log Adsterra environment variables to verify they are being read correctly
+    console.log('[Adsterra] Environment Variables Check:');
+    console.log(' - Popunder URL:', import.meta.env.VITE_ADSTERRA_POPUNDER_URL || 'NOT SET');
+    console.log(' - Social Bar URL:', import.meta.env.VITE_ADSTERRA_SOCIALBAR_URL || 'NOT SET');
+    
+    if (!import.meta.env.VITE_ADSTERRA_POPUNDER_URL && !import.meta.env.VITE_ADSTERRA_SOCIALBAR_URL) {
+      console.warn('[Adsterra] Both URLs are missing. Ensure you have set VITE_ADSTERRA_POPUNDER_URL and VITE_ADSTERRA_SOCIALBAR_URL in your deployment platform.');
+    }
+    
     const interval = setInterval(() => {
       setLoadingProgress(prev => {
         if (prev >= 100) {
@@ -549,7 +557,6 @@ export default function App() {
       </main>
 
       {/* Modals */}
-      <AdsterraAds />
       <AnimatePresence>
         {(showPrivacy || showTerms) && (
           <motion.div 
