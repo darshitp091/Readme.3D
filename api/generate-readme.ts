@@ -64,10 +64,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     
     The README MUST include:
     1. A catchy title with an emoji.
-    2. High-quality Badges (using Shields.io).
+    2. High-quality Badges (using Shields.io, style=for-the-badge).
     3. A compelling and detailed description.
     4. A comprehensive Features list with emojis.
-    5. Tech Stack section with icons/badges.
+    5. Tech Stack section with Shields.io badges for each major technology (e.g., React, TypeScript, Node.js, etc.).
+       Format: https://img.shields.io/badge/NAME-COLOR?style=for-the-badge&logo=LOGO&logoColor=white
     6. Detailed Installation & Setup instructions.
     7. Usage examples with code blocks.
     8. Project structure overview tree.
